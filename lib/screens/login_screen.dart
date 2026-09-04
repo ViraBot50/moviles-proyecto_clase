@@ -9,12 +9,15 @@ class loginScreen extends StatefulWidget {
 }
 
 class _loginScreenState extends State<loginScreen> {
+  bool isloading=false;
+  
   @override
   Widget build(BuildContext context) {
 
     final txtUser=TextFormField(
       decoration: InputDecoration(
-        border: OutlineInputBorder()
+        border: OutlineInputBorder(),
+      
       ),
     );
 
@@ -24,6 +27,38 @@ class _loginScreenState extends State<loginScreen> {
         border: OutlineInputBorder()
       ),
     );
+
+    final loading = Positioned(
+      top:100,
+      child:CircularProgressIndicator(color: Colors.white,)
+    );
+
+    final btnLogin= ElevatedButton(
+      onPressed: (){
+        isloading = !isloading;
+        setState(() {});
+        Future.delayed(
+          Duration(seconds: 4)
+        ).then((value) {
+          Navigator.pushNamed(context, "/dash");
+          isloading = false;
+          setState(() {});
+          });
+
+       
+
+      },
+      child: Row(
+        children: [
+          Icon(Icons.login),
+          Text('Iniciar Sesion')
+        ],
+      ),
+    );
+
+    final space= Container(height: 5,);
+
+    final Space2=SizedBox(height: 5,);
 
 
     return Scaffold(
@@ -45,23 +80,27 @@ class _loginScreenState extends State<loginScreen> {
                 bottom: 50,
                 child: Container(
                   padding: EdgeInsets.all(8),
-                  height: 200,
+                  height: 170,
                   width: MediaQuery.of(context).size.width*0.9,
                   decoration: BoxDecoration(
                     borderRadius:BorderRadiusDirectional.circular(20),
-                    color: Color(0x99FFFFFF)
+                    color: Color.fromARGB(159, 163, 12, 239)
                   ),
                   child:Column(
                     children: [
                       txtUser,
                       Divider(),
-                      txtPwd
+                      txtPwd,
+                      Space2,
+                      btnLogin
                     ],
                   ),                
                 ),
-              )
+              ),
+            isloading? loading:Container()
+
             ],
-          ),          
+          ),
 
         ),
 
