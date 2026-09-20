@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/components/global_values.dart';
+import 'package:flutter_application_1/components/theme_app.dart';
 import 'package:flutter_application_1/screens/dashboard_screen.dart';
 import 'package:flutter_application_1/screens/login_screen.dart';
 
@@ -11,12 +13,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: loginScreen(),
-      routes: {
-        "/dash":(context) => DashboardScreen()
-      },
+    return  ValueListenableBuilder(
+      valueListenable: GlobalValues.banThem,
+      builder: (context,value,_) {
+
+        ThemeData tema= ThemeData.light();
+        switch(value){
+          case 0:tema=ThemeData.dark(); break;
+
+          case 1:tema=ThemeData.light(); break;
+
+          case 2:tema=ThemeApp.warmTheme();
+
+        }
+
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: tema,
+          home: loginScreen(),
+          routes: {
+            "/dash":(context) => DashboardScreen()
+          },
+        );
+      }
     );
   }
 }
