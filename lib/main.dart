@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/components/global_values.dart';
 import 'package:flutter_application_1/components/theme_app.dart';
+import 'package:flutter_application_1/screens/add_note_screen.dart';
 import 'package:flutter_application_1/screens/dashboard_screen.dart';
 import 'package:flutter_application_1/screens/login_screen.dart';
+import 'package:flutter_application_1/screens/notes_screen.dart';
 
 
 void main() => runApp(MyApp());
@@ -32,7 +34,9 @@ class MyApp extends StatelessWidget {
           theme: tema,
           home: loginScreen(),
           routes: {
-            "/dash":(context) => DashboardScreen()
+            "/dash":(context) => DashboardScreen(),
+            "/note":(context) => NotesScreen(),
+            "/add":(context) => AddNoteScreen()
           },
         );
       }

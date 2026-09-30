@@ -4,5 +4,5 @@ class GlobalValues {
   //0 --> Noche
   //1 --> Dia
   //2 --> Calido
-  static ValueNotifier<int> banThem=ValueNotifier(0);
+  static ValueNotifier<int> banThem=ValueNotifier(1);
 }

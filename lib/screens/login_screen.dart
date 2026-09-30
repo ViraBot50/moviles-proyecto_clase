@@ -75,12 +75,12 @@ class _loginScreenState extends State<loginScreen> {
           child:Stack(
             alignment: AlignmentGeometry.center,
             children: [
-              Image.asset('resources/logo.png', height: 180,),
+              Image.asset('resources/logo.png', height: 150,),
               Positioned(
-                bottom: 50,
+                bottom: 90,
                 child: Container(
                   padding: EdgeInsets.all(8),
-                  height: 170,
+                  height: 210,
                   width: MediaQuery.of(context).size.width*0.9,
                   decoration: BoxDecoration(
                     borderRadius:BorderRadiusDirectional.circular(20),
@@ -91,7 +91,7 @@ class _loginScreenState extends State<loginScreen> {
                       txtUser,
                       Divider(),
                       txtPwd,
-                      Space2,
+                      Divider(),
                       btnLogin
                     ],
                   ),                
