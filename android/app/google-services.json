@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "386357574410",
+    "project_id": "moviles-737ea",
+    "storage_bucket": "moviles-737ea.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386357574410:android:9746f9bec7dc7c67ce98f3",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5jQeC_nCTzy3RTzEtIEuOD_NySHD9KGQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
