@@ -4,12 +4,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 class EmailAuth {
   final FirebaseAuth _firebaseAuth=FirebaseAuth.instance;  
 
-  Future <void> m_creaUsuario({required String user,required String pass}) async{
+  Future <bool> m_creaUsuario({required String user,required String pass}) async{
     try {
       final credentials= await _firebaseAuth.createUserWithEmailAndPassword(email: user, password: pass);
-      credentials.user!.sendEmailVerification();    
+      credentials.user!.sendEmailVerification(); 
+      return true;   
     } catch (e) {
-      
+      return false;
     }
   }
 

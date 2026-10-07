@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 
@@ -49,9 +51,11 @@ class _loginScreenState extends State<loginScreen> {
 
       },
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Icon(Icons.login),
-          Text('Iniciar Sesion')
+          SizedBox(width: 5),
+          Text('Crear cuenta'),
         ],
       ),
     );
@@ -77,10 +81,10 @@ class _loginScreenState extends State<loginScreen> {
             children: [
               Image.asset('resources/logo.png', height: 150,),
               Positioned(
-                bottom: 90,
+                bottom: 50,
                 child: Container(
                   padding: EdgeInsets.all(8),
-                  height: 210,
+                  height: 200,
                   width: MediaQuery.of(context).size.width*0.9,
                   decoration: BoxDecoration(
                     borderRadius:BorderRadiusDirectional.circular(20),
@@ -88,11 +92,32 @@ class _loginScreenState extends State<loginScreen> {
                   ),
                   child:Column(
                     children: [
-                      txtUser,
+                      Row(
+                        children: [
+                          Text("Usuario: ",style: TextStyle(color: Colors.white)),
+                          SizedBox(width: 5,),
+                          Expanded(child: txtUser),
+                        ],
+                      ),
                       Divider(),
-                      txtPwd,
+                      Row(
+                        children: [
+                          Text("password: ",style: TextStyle(color: Colors.white)),
+                          SizedBox(width: 5,),
+                          Expanded(child: txtPwd),
+                        ],
+                      ),
                       Divider(),
-                      btnLogin
+                      btnLogin,
+                      InkWell(
+                        onTap: (){
+                            Navigator.pushNamed(context, "/signIn");
+                        },
+                        child: Text("Crear cuenta",style: TextStyle(
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                          ),),
+                        ),
                     ],
                   ),                
                 ),
