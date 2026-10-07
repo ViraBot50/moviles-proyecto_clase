@@ -11,8 +11,8 @@ import 'package:flutter_application_1/screens/sign_in_screen.dart';
 
 
 void main() async{ 
-  //WidgetsFlutterBinding.ensureInitialized();
-  //await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(MyApp());
   }
 

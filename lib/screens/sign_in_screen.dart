@@ -9,6 +9,8 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  final conUser=TextEditingController();
+  final conPwd=TextEditingController();
   EmailAuth? _emailAuth;
   @override
   void initState() {
@@ -18,12 +20,12 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    final conUser=TextEditingController();
-    final conPwd=TextEditingController();
+    
 
 
     final txtUser = TextFormField(
       controller: conUser,
+      style: TextStyle(color: Colors.white),
       decoration: InputDecoration(
         border: OutlineInputBorder(),
       ),
@@ -32,6 +34,7 @@ class _SignInState extends State<SignIn> {
     final txtPwd = TextFormField(
       controller: conPwd,
       obscureText: true,
+      style: TextStyle(color: Colors.white),
       decoration: InputDecoration(
         border: OutlineInputBorder(),
       ),
@@ -41,7 +44,13 @@ class _SignInState extends State<SignIn> {
       onPressed: () {
         _emailAuth!.m_creaUsuario(user: conUser.text, pass: conPwd.text).then((value) {
           if (value){
-            
+            ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Se registro correctamente el usuario"),
+                      duration: Duration(seconds: 3),
+                    ),
+                  );
+            Navigator.pop(context);
           }
         },);
       },
@@ -78,7 +87,7 @@ class _SignInState extends State<SignIn> {
               bottom: 50,
               child: Container(
                 padding: EdgeInsets.all(8),
-                height: 225,
+                height: 260,
                 width: MediaQuery.of(context).size.width * 0.9,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
