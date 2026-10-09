@@ -7,6 +7,7 @@ import 'package:flutter_application_1/screens/add_note_screen.dart';
 import 'package:flutter_application_1/screens/dashboard_screen.dart';
 import 'package:flutter_application_1/screens/login_screen.dart';
 import 'package:flutter_application_1/screens/notes_screen.dart';
+import 'package:flutter_application_1/screens/notes_screen_nube.dart';
 import 'package:flutter_application_1/screens/sign_in_screen.dart';
 
 
@@ -44,7 +45,8 @@ class MyApp extends StatelessWidget {
             "/dash":(context) => DashboardScreen(),
             "/note":(context) => NotesScreen(),
             "/add":(context) => AddNoteScreen(),
-            "/signIn":(context)=>SignIn()
+            "/signIn":(context)=>SignIn(),
+            "/notesNube":(context)=>NotesScreenNube()
           },
         );
       }

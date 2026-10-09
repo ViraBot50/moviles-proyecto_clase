@@ -37,6 +37,15 @@ class DashboardScreen extends StatelessWidget {
                 },
               ),
               ListTile(
+                title: Text('Lista de notas nube'),
+                subtitle: Text('App Notes Cloude'),
+                leading: Icon(Icons.cloud),
+                trailing: Icon(Icons.chevron_right),
+                onTap: (){
+                  Navigator.pushNamed(context, '/notesNube');
+                },
+              ),
+              ListTile(
                 title: Text('Cerrar sesión'),
                 subtitle: Text('Salir'),
                 leading: Icon(Icons.logout),
