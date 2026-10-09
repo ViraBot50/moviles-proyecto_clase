@@ -72,7 +72,7 @@ class _loginScreenState extends State<loginScreen> {
       },
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: [Icon(Icons.login), SizedBox(width: 5), Text('Crear cuenta')],
+        children: [Icon(Icons.login), SizedBox(width: 5), Text('Login')],
       ),
     );
 
