@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/components/global_values.dart';
 import 'package:flutter_application_1/components/theme_app.dart';
 import 'package:flutter_application_1/firebase_options.dart';//importar para firebase
+import 'package:flutter_application_1/screens/add_note_nube_screen.dart';
 import 'package:flutter_application_1/screens/add_note_screen.dart';
 import 'package:flutter_application_1/screens/dashboard_screen.dart';
 import 'package:flutter_application_1/screens/login_screen.dart';
@@ -46,7 +47,8 @@ class MyApp extends StatelessWidget {
             "/note":(context) => NotesScreen(),
             "/add":(context) => AddNoteScreen(),
             "/signIn":(context)=>SignIn(),
-            "/notesNube":(context)=>NotesScreenNube()
+            "/notesNube":(context)=>NotesScreenNube(),
+            "/addNube":(context) => AddNoteNubeScreen(),
           },
         );
       }

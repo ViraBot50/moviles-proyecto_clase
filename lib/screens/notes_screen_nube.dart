@@ -18,13 +18,13 @@ class _NotesScreenNubeState extends State<NotesScreenNube> {
   @override
   void initState() {
     super.initState();
-    _firestoreNotes=FirestoreNotes();
+    _firestoreNotes = FirestoreNotes();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Lista de notas")),
+      appBar: AppBar(title: Text("Lista de notas nube")),
       body: StreamBuilder(
         stream: _firestoreNotes!.m_select(),
         builder: (context, snapshot) {
@@ -44,7 +44,7 @@ class _NotesScreenNubeState extends State<NotesScreenNube> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(context, "/add").then((value) {
+        onPressed: () => Navigator.pushNamed(context, "/addNube").then((value) {
           setState(() {});
         }),
 
@@ -77,13 +77,21 @@ class _NotesScreenNubeState extends State<NotesScreenNube> {
               ),
             ),
 
-            Column(children: [Text(note.get("title")), Text(note.get("content"))]),
+            Column(
+              children: [Text(note.get("title")), Text(note.get("content"))],
+            ),
 
             IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/add", arguments: note).then((
-                  value,
-                ) {
+                Navigator.pushNamed(
+                  context,
+                  "/addNube",
+                  arguments: {
+                    "idNote": note.id,
+                    "title": note.get("title"),
+                    "content": note.get("content"),
+                  },
+                ).then((value) {
                   setState(() {});
                 });
               },
@@ -112,17 +120,16 @@ class _NotesScreenNubeState extends State<NotesScreenNube> {
         TextButton(
           child: Text("Aceptar"),
           onPressed: () {
-            // notesDB!.DELETE(idNote).then((value) {
-            //   String msj = (value == 1)
-            //       ? "Registro borrado"
-            //       : "Ha ocurrido un problema con el borrado";
-            //   ScaffoldMessenger.of(context).showSnackBar(
-            //     SnackBar(content: Text(msj), duration: Duration(seconds: 3)),
-            //   );
-            // });
-            // Navigator.of(context).pop();
-            // setState(() {});
-            
+            _firestoreNotes!.m_delete(idNote).then((value) {
+              String msj = (value)
+                  ? "Registro borrado"
+                  : "Ha ocurrido un problema con el borrado";
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(msj), duration: Duration(seconds: 3)),
+              );
+            });
+            Navigator.of(context).pop();
+            setState(() {});
           },
         ),
 
