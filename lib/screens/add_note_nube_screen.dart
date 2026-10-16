@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/config/firestore_notes.dart';
 import 'package:flutter_application_1/database/notes_dao.dart';
 
-
 class AddNoteNubeScreen extends StatefulWidget {
   const AddNoteNubeScreen({super.key});
 
@@ -14,7 +13,9 @@ class _AddNoteNubeScreenState extends State<AddNoteNubeScreen> {
   FirestoreNotes? notesDB;
   final conTitle = TextEditingController();
   final conContent = TextEditingController();
-  Map<String,dynamic>? note;
+  final conDate = TextEditingController();
+  DateTime _selectedDate=DateTime.now();
+  Map<String, dynamic>? note;
   @override
   void initState() {
     super.initState();
@@ -23,15 +24,26 @@ class _AddNoteNubeScreenState extends State<AddNoteNubeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     if (ModalRoute.of(context)!.settings.arguments != null) {
-      note = ModalRoute.of(context)!.settings.arguments as Map<String,dynamic>;
+      note = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       conTitle.text = note!["title"];
       conContent.text = note!["content"];
     }
-
-    final txtTitle = TextFormField(controller: conTitle);
-    final txtContent = TextFormField(maxLines: 8, controller: conContent);
+    conDate.text=_selectedDate.toString().substring(0,10);
+    final txtTitle = TextFormField(
+      controller: conTitle,
+      decoration: InputDecoration(hintText: "Title"),
+    );
+    final txtContent = TextFormField(
+      maxLines: 8,
+      controller: conContent,
+      decoration: InputDecoration(hintText: "Content"),
+    );
+    final txtDate = TextFormField(
+      controller: conDate,
+      decoration: InputDecoration(hintText: "Fecha vencimiento"),
+      onTap: () => _desplegarFechas(context),
+    );
     final space = SizedBox(height: 20);
     final btnSave = ElevatedButton(
       onPressed: () {
@@ -40,7 +52,7 @@ class _AddNoteNubeScreenState extends State<AddNoteNubeScreen> {
               .m_insert({
                 "title": conTitle.text,
                 "content": conContent.text,
-                "fecha": "2026-09-25",
+                "fecha": conDate.text,
               })
               .then((value) {
                 if (value) {
@@ -54,11 +66,13 @@ class _AddNoteNubeScreenState extends State<AddNoteNubeScreen> {
                 }
               });
         } else {
-          notesDB!.m_update({
-            "title":conTitle.text,
-            "content":conContent.text
-          },note!["idNote"]).then((value){
-            if (value) {
+          notesDB!
+              .m_update({
+                "title": conTitle.text,
+                "content": conContent.text,
+              }, note!["idNote"])
+              .then((value) {
+                if (value) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text("Se actualizo correctamente el registro"),
@@ -67,14 +81,32 @@ class _AddNoteNubeScreenState extends State<AddNoteNubeScreen> {
                   );
                   Navigator.pop(context);
                 }
-          });
+              });
         }
       },
       child: Text("Save Note"),
     );
     return Scaffold(
       appBar: AppBar(title: Text("Insertar Nota nube")),
-      body: Column(children: [txtTitle, space, txtContent, space, btnSave]),
+      body: Column(
+        children: [txtTitle, space, txtContent, space, txtDate, space, btnSave],
+      ),
     );
+  }
+
+   _desplegarFechas(BuildContext context) async {
+   
+   final DateTime? _date= await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime(2025),
+      lastDate: DateTime(2076),
+    );
+
+    if (_date!=null && _date!=_selectedDate)
+      setState(() {_selectedDate=_date;});
+    
+
+    
   }
 }
