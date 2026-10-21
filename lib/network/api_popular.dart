@@ -1,0 +1,24 @@
+import 'dart:convert';
+import 'package:flutter_application_1/models/popular_model.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http; //declarando un objeto que accede a la clase
+class ApiPopular {
+  final String? apiKey = dotenv.env['api_key'];
+  late Uri link;
+  ApiPopular(){
+    link=Uri.parse("https://api.themoviedb.org/3/movie/popular?api_key=$apiKey&language=es-MX&page=1");
+  }
+
+  Future<List<PopularModel>?> getAllPopular() async {
+    
+    var response=await http.get(link);
+    if (response.statusCode==200){
+      var jsonResult= jsonDecode(response.body)['results'] as List;
+      print("numeros");
+      print (jsonResult.length);
+      return jsonResult.map((popular)=>PopularModel.fromMap(popular)).toList();
+    }
+      return null;
+  }
+
+}
