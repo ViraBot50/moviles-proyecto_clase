@@ -7,7 +7,7 @@ class PopularModel {
   String overview;
   double popularity;
   String posterPath;
-  DateTime releaseDate;
+  String releaseDate;
   double voteAverage;
   int voteCount;
 

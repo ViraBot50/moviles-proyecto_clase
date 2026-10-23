@@ -6,6 +6,7 @@ import 'package:flutter_application_1/firebase_options.dart';//importar para fir
 import 'package:flutter_application_1/network/api_popular.dart';
 import 'package:flutter_application_1/screens/add_note_nube_screen.dart';
 import 'package:flutter_application_1/screens/add_note_screen.dart';
+import 'package:flutter_application_1/screens/api_popular_screen.dart';
 import 'package:flutter_application_1/screens/dashboard_screen.dart';
 import 'package:flutter_application_1/screens/login_screen.dart';
 import 'package:flutter_application_1/screens/notes_screen.dart';
@@ -28,8 +29,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ApiPopular api= ApiPopular();
-    api.getAllPopular();
+    // ApiPopular api= ApiPopular();
+    // api.getAllPopular();
     return  ValueListenableBuilder(
       valueListenable: GlobalValues.banThem,
       builder: (context,value,_) {
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
             "/signIn":(context)=>SignIn(),
             "/notesNube":(context)=>NotesScreenNube(),
             "/addNube":(context) => AddNoteNubeScreen(),
+            "/movies":(context)=>ApiPopularScreen(),
           },
         );
       }

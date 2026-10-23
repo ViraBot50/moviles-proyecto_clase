@@ -45,6 +45,15 @@ class DashboardScreen extends StatelessWidget {
                   Navigator.pushNamed(context, '/notesNube');
                 },
               ),
+               ListTile(
+                title: Text('Lista de perliculas'),
+                subtitle: Text('Peliculas populares'),
+                leading: Icon(Icons.movie),
+                trailing: Icon(Icons.chevron_right),
+                onTap: (){
+                  Navigator.pushNamed(context, '/movies');
+                  },
+              ),
               ListTile(
                 title: Text('Cerrar sesión'),
                 subtitle: Text('Salir'),
@@ -57,6 +66,7 @@ class DashboardScreen extends StatelessWidget {
                   Navigator.pushReplacementNamed(context, '/');
                   },
               ),
+             
               
           ],
         ),
