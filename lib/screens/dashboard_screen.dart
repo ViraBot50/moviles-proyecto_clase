@@ -54,6 +54,15 @@ class DashboardScreen extends StatelessWidget {
                   Navigator.pushNamed(context, '/movies');
                   },
               ),
+               ListTile(
+                title: Text('Google Maps'),
+                subtitle: Text('Mapa Oficinas de Google'),
+                leading: Icon(Icons.map),
+                trailing: Icon(Icons.chevron_right),
+                onTap: (){
+                  Navigator.pushNamed(context, '/map');
+                  },
+              ),
               ListTile(
                 title: Text('Cerrar sesión'),
                 subtitle: Text('Salir'),

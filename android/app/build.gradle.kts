@@ -1,15 +1,31 @@
+
+import java.util.Properties
+
 plugins {
     id("com.android.application")
-    // START: FlutterFire Configuration
+    // Configuración de Firebase
     id("com.google.gms.google-services")
-    // END: FlutterFire Configuration
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    // Plugin de Flutter
     id("dev.flutter.flutter-gradle-plugin")
 }
+
+// Leer variables del archivo .env
+val envProperties = Properties()
+val envFile = rootProject.file("../.env")
+
+if (envFile.exists()) {
+    envFile.inputStream().use { input ->
+        envProperties.load(input)
+    }
+}
+
+val mapsApiKey = envProperties.getProperty("GOOGLE_MAPS_API_KEY")
+    ?: error("No se encontró GOOGLE_MAPS_API_KEY en el archivo .env")
 
 android {
     namespace = "com.example.flutter_application_1"
     compileSdk = flutter.compileSdkVersion
+    //compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -18,24 +34,17 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.example.flutter_application_1"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
-        // Uses the version code from pubspec.yaml. When using split APKs, 1000 * ABI_VERSION
-        // is added automatically by Flutter. (https://developer.android.com/studio/build/configure-apk-splits#configure-APK-versions)
-        // You can force using the value of versionCode by specifying the `-P force-version-code-ignoring-abi=true`
-        // flag during build.
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+
+        manifestPlaceholders["GOOGLE_MAPS_API_KEY"] = mapsApiKey
     }
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
         }
     }
